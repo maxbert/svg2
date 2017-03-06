@@ -55,3 +55,62 @@ var stop = function(e){
 };
 
 but.addEventListener('click', stop);
+
+
+//_____________________
+
+var animatedot = function(e){
+    window.cancelAnimationFrame( rid);
+    var x = 0;
+    var y = (Math.random() * h);
+    var r = 20;
+    var d = 1;
+    var direction = false;
+    var ydirection = false;
+    clearer();
+    var c = document.createElementNS("http://www.w3.org/2000/svg","rect");
+    //c.setAttribute('xlink:href',"blueray.png");
+    //c.setAttribute('xmlns:xlink',"http://www.w3.org/1999/xlink");
+    c.setAttribute('height', '102px');
+    c.setAttribute('width','200px');
+    c.setAttribute("fill","yellow");
+    svg.appendChild(c);
+
+    var drawdot = function(e){
+	c.setAttribute("y", y);
+	c.setAttribute("x", x);
+	//console.log(c);
+	
+	window.cancelAnimationFrame( rid );
+	
+	if (direction == false){
+	    x++;
+	}else{
+	    x--;
+	};
+
+	if (ydirection == false){
+	    y+=2;
+	}else{
+	    y-=2;
+	};
+
+	if (x >= w -200){
+	    direction = true;
+	};
+	if (x <= 0){
+	    direction = false;
+	};
+	if (y >= h-102){
+	    ydirection = true;
+	};
+	if (y <=  0){
+	    ydirection = false;
+	};
+	//console.log(y);
+	rid =window.requestAnimationFrame( drawdot )
+    };
+
+    drawdot();
+}
+document.getElementById("dvd").addEventListener('click',animatedot);
